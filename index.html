@@ -6,11 +6,45 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Bojack RPG</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
+    integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous">
+  </script>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/styles.css">
 </head>
 
 <body>
 
+  <div class="gameLogo"><img src="images/bojacklogo.png" alt="logo">RPG</div>
 
+  <div class="playerBox">
+    <div class=" player player0"></div>
+    <div class=" player player1"></div>
+    <div class=" player player2"></div>
+    <div class=" player player3"></div>
+    <div class=" player player4"></div>
+  </div>
+
+  <div class="gameInfo">
+    <div class="playerCharacterText gameText">Player Character</div>
+    <div class="playerCharacter"></div>
+    <div class="remainingEnemiesText gameText">Remaining Enemies</div>
+    <div class="remainingEnemies"></div>
+
+    <button type="button" class="btn btn-light shadow-none" id="attack">ATTACK</button>
+
+    <div class="currentOpponentText gameText">Current Opponent</div>
+    <div class="currentOpponent"></div>
+  </div>
+
+
+
+
+
+  <script src="https://code.jquery.com/jquery-3.4.1.min.js"
+    integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
   <script src="game.js"></script>
 </body>
 

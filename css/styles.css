@@ -1,0 +1,73 @@
+@font-face {
+  font-family: "Ness";
+  src: url("../ness.ttf");
+}
+
+body,
+html {
+  background: url(../images/bojackBackground.png);
+  background-size: cover;
+  font-family: "Ness";
+  overflow: hidden;
+}
+
+
+.playerBox,
+.playerCharacter,
+.currentOpponent {
+  display: flex;
+  margin: 0.625rem auto 3.125rem;
+}
+
+.playerBox div,
+.playerCharacter div,
+.currentOpponent div {
+  text-align: center;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 5px black, 0 0 5px black;
+  font-size: 1.4rem;
+  width: 13%;
+  height: 12.5rem;
+  display: inline;
+  transition: all .2s ease-in-out;
+}
+
+
+.playerBox div:hover {
+  transform: scale(1.1);
+}
+
+.playerBox img,
+.playerCharacter img,
+.currentOpponent img {
+  height: 85%;
+  display: block;
+  margin: auto;
+}
+
+.gameLogo {
+  float: right;
+  text-align: center;
+  font-size: 4.375rem;
+  font-weight: 900;
+  margin-top: 0.9375rem;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 5px black, 0 0 5px black;
+}
+
+.gameLogo img {
+  height: 9.375rem;
+  display: block;
+}
+
+.btn {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.gameText {
+  font-size: 2rem;
+  font-weight: 600;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 5px black, 0 0 5px black;
+}
