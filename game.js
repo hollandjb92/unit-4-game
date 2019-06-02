@@ -1,66 +1,81 @@
-let playersArray = [{
-    player: "Bojack",
-    playerImg: "images/bojack.png",
-    healthPoints: 200,
-    attackPower: 20,
-    counterAttackPower: 10
-  },
-  {
-    player: "Diane",
-    playerImg: "images/diane.png",
-    healthPoints: 100,
-    attackPower: 40,
-    counterAttackPower: 40
-  },
-  {
-    player: "Princess Carolyn",
-    playerImg: "images/princesscarolyn.png",
-    healthPoints: 150,
-    attackPower: 80,
-    counterAttackPower: 50
-  },
-  {
-    player: "Todd",
-    playerImg: "images/todd.png",
-    healthPoints: 125,
-    attackPower: 50,
-    counterAttackPower: 70
-  },
-  {
-    player: "Mr. Peanutbutter",
-    playerImg: "images/peanutbutter.png",
-    healthPoints: 175,
-    attackPower: 25,
-    counterAttackPower: 100
-  },
-]
+// holds the player object
+let player;
+//holds the current opponent object
+let opponent;
+//holds all remaining opponents
+let opponents = [];
 
 
-function resetGame() {
 
+function initializeGame() {
+
+  //array of player objects
+  let playersArray = [
+    bojack = {
+      player: "Bojack",
+      playerImg: "images/bojack.png",
+      healthPoints: 200,
+      attackPower: 10,
+      counterAttackPower: 5
+    },
+    diane = {
+      player: "Diane",
+      playerImg: "images/diane.png",
+      healthPoints: 100,
+      attackPower: 50,
+      counterAttackPower: 25
+    },
+    carolyn = {
+      player: "Princess Carolyn",
+      playerImg: "images/princesscarolyn.png",
+      healthPoints: 150,
+      attackPower: 30,
+      counterAttackPower: 15
+    },
+    todd = {
+      player: "Todd",
+      playerImg: "images/todd.png",
+      healthPoints: 125,
+      attackPower: 40,
+      counterAttackPower: 20
+    },
+    peanutbutter = {
+      player: "Mr. Peanutbutter",
+      playerImg: "images/peanutbutter.png",
+      healthPoints: 175,
+      attackPower: 20,
+      counterAttackPower: 10
+    }
+  ]
+
+  //empty vars/array/divs
+  player = null;
+  opponent = null;
+  opponents = [];
   $(".playerCharacter", ".remainingEnemies", ".currentOpponent").empty();
 
-  for (i = 0; i < playersArray.length; i++) {
-    $(".player" + i).prepend("<img src=" + playersArray[i].playerImg + " >");
-    $(".player" + i).prepend(playersArray[i].player);
-    $(".player" + i).append("<p>HP: " + playersArray[i].healthPoints)
-  }
+  //loops through and populates each div for the starting character selection
+  $.each(playersArray, function (index, player) {
+    $("#" + index).prepend("<img src=" + player.playerImg + ">");
+    $("#" + index).prepend(player.player);
+    $("#" + index).append("<span id='HP'> HP: " + player.healthPoints + " </span>");
+  })
 
   $(".player").on("click", function () {
-    if (isEmpty($(".playerCharacter"))) {
-      playTheme();
-      $(this).appendTo(".playerCharacter");
-      $(".playerBox").appendTo(".remainingEnemies");
-    } else if ($(this).parents(".remainingEnemies").length) {
-      $(".player").on("click", function () {
-        if (isEmpty($(".currentOpponent"))) {
-          $(this).appendTo(".currentOpponent");
-        }
-      })
+    if (!player) {
+
     }
   })
+
+
+
+
 }
-//more consistent method of checking if player character has been chosen since :empty selector wasn't really working
+
+
+
+
+//checks for empty div since :empty selector wasn't working consistently
 function isEmpty(element) {
   return !$.trim(element.html());
 }
@@ -71,14 +86,7 @@ function playTheme() {
   audio.play();
 }
 
-function attackButton() {
-
-}
 
 
-
-
-
-
-//running the game
-resetGame();
+//running game
+initializeGame();
