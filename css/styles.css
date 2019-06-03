@@ -14,32 +14,37 @@ html {
 
 .playerBox,
 .playerCharacter,
-.currentOpponent {
+.currentOpponent,
+.remainingEnemies {
   display: flex;
   margin: 0.625rem auto 3.125rem;
 }
 
 .playerBox div,
 .playerCharacter div,
-.currentOpponent div {
+.currentOpponent div,
+.remainingEnemies div {
   text-align: center;
   color: white;
   text-shadow: 1px 1px 2px black, 0 0 5px black, 0 0 5px black;
   font-size: 1.4rem;
   width: 13%;
-  height: 12.5rem;
+  height: 200px;
   display: inline;
   transition: all .2s ease-in-out;
 }
 
 
-.playerBox div:hover {
+
+.playerBox div:hover,
+.remainingEnemies div:hover {
   transform: scale(1.1);
 }
 
 .playerBox img,
 .playerCharacter img,
-.currentOpponent img {
+.currentOpponent img,
+.remainingEnemies img {
   height: 85%;
   display: block;
   margin: auto;
