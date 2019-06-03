@@ -61,7 +61,7 @@
     //empty vars/array/divs
     player = null;
     opponent = null;
-    $(".playerCharacter", ".remainingEnemies", ".currentOpponent", "#HP").empty();
+    $(".playerCharacter", ".remainingEnemies", ".currentOpponent").empty();
 
     //loops through and populates each div for the starting character selection with image, name, and HP
     $.each(playersArray, function (index, player) {
@@ -73,8 +73,10 @@
     //upon clicking one of the 5 player options
     $(".player").on("click", function () {
 
-      //if player doesn't exist or is null
+
+      //if player charater div is empty (aka they haven't picked their character yet)
       if (isEmpty($(".playerCharacter"))) {
+        //hide reset button  and play theme once game starts
         restart.hide();
         playTheme();
         //grab the ID of the parent div and use as index to grab correct object from array and store in variable player
@@ -82,44 +84,49 @@
         player = playersArray[playerIndex];
         //move selected character to player div
         $(this).appendTo(".playerCharacter");
-
+        //if the user clicks on something in the remaining enemies div
       } else if ($(this).parents(".remainingEnemies").length) {
+        //and the current opponent div is empty
         if (isEmpty($(".currentOpponent"))) {
+          // move to current opponent div
           $(this).appendTo(".currentOpponent");
+          //store the object in var opponent
           let opponentId = parseInt($(this).closest("div").prop("id"));
           opponent = playersArray[opponentId];
         }
       }
 
-      //move enemies
+      //move enemies to remaining enemies div ~I THINK THIS IS THE ISSUE~ MOVE THEM ONE BY ONE USNG A LOOP?
       $(".playerBox").appendTo(".remainingEnemies");
     })
   }
 
-
-
-
+  //when user clicks attack button
   $("#attack").on("click", function () {
+    //if opponent has been picked
     if (opponent) {
       //decrease health variables accordingly
       player.healthPoints -= opponent.counterAttackPower;
       opponent.healthPoints -= player.attackPower;
-
       //update HP and double player attack power
       $(".playerCharacter").find("span").html("HP: " + player.healthPoints);
       $(".currentOpponent").find("span").html("HP: " + opponent.healthPoints);
       player.attackPower = player.attackPower * 2;
 
-
+      //if player dies
       if (player.healthPoints <= 0) {
+        //show restart button and loser text (make a better losing/win screen later)
         restart.show();
         $("#winOrLose").html("YOU LOSE");
+        //if opponent dies clear out current opponent div so another player can be picked
       } else if (opponent.healthPoints <= 0) {
         $(".currentOpponent").empty();
+        //set opponent to null so player click picks up new object
         opponent = null;
       }
-
+      // if player wins 
       if (isEmpty($(".playerBox"))) {
+        //show restart button and loser text (make a better losing/win screen later)
         $("#winOrLose").html("YOU WIN")
         restart.show();
       }
@@ -130,8 +137,5 @@
   //RUNNING THE GAME (functions are great)
   initializeGame();
   restart.on("click", function () {
-
     initializeGame();
-
-
   })
