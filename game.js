@@ -3,9 +3,9 @@
   //holds the current opponent object
   let opponent;
   //restart button
-  let restart = $("#restart")
+  let restart = $("#restart");
   //endgame status
-  let status = $("#winOrLose")
+  let status = $("#winOrLose");
   //audio var for pausing later
   let audio;
 
@@ -29,44 +29,43 @@
         player: "Bojack",
         playerImg: "images/bojack.png",
         healthPoints: 300,
-        attackPower: 5,
+        attackPower: 3,
         counterAttackPower: 10
       },
       diane = {
         player: "Diane",
         playerImg: "images/diane.png",
         healthPoints: 100,
-        attackPower: 25,
+        attackPower: 23,
         counterAttackPower: 25
       },
       carolyn = {
         player: "Princess Carolyn",
         playerImg: "images/princesscarolyn.png",
         healthPoints: 200,
-        attackPower: 8,
+        attackPower: 6,
         counterAttackPower: 16
       },
       todd = {
         player: "Todd",
         playerImg: "images/todd.png",
         healthPoints: 150,
-        attackPower: 14,
+        attackPower: 12,
         counterAttackPower: 21
       },
       peanutbutter = {
         player: "Mr. Peanutbutter",
         playerImg: "images/peanutbutter.png",
         healthPoints: 250,
-        attackPower: 11,
+        attackPower: 9,
         counterAttackPower: 22
       }
     ]
 
-    //empty vars/array/divs
+    //empty vars/divs/show playerBox/hide winLose status
     player = null;
     opponent = null;
     $(".playerBox").show();
-    //the following three lines don't work when incorported into a single line?
     $(".remainingEnemies").empty();
     $(".currentOpponent").empty();
     $(".playerCharacter").empty();
@@ -74,14 +73,14 @@
 
     //loops through and populates each div for the starting character selection with image, name, and HP
     $.each(playersArray, function (index, player) {
-
+      //creates a div with the class Player and ID of whatever the current index is
       let characterDiv = $("<div>").addClass("player").attr("id", index);
+      //appends this div to the playerBox div
       $(".playerBox").append(characterDiv);
-
-
-      $("#" + index).prepend("<img src=" + player.playerImg + ">").appendTo(characterDiv);
-      $("#" + index).prepend(player.player).appendTo(characterDiv);
-      $("#" + index).append("<span id='HP'> HP: " + player.healthPoints + " </span>").appendTo(characterDiv);
+      //add img/text/HP to the div created above
+      $("#" + index).prepend("<img src=" + player.playerImg + ">");
+      $("#" + index).prepend(player.player);
+      $("#" + index).append("<span id='HP'> HP: " + player.healthPoints + " </span>");
 
 
     })
@@ -98,9 +97,13 @@
         player = playersArray[playerIndex];
         //move selected character to player div
         $(this).appendTo(".playerCharacter");
+        //loops through players array
         $.each(playersArray, function (index, player) {
+          //creates var to find the ID of each unpicked character
           let characterIndex = parseInt($(".playerBox").children("div").prop("id"));
+          //this ID will never match the playerIndex ID from above
           if (playerIndex != characterIndex) {
+            // move them to remainingEnemies div and hide the playerBox 
             $("#" + characterIndex).appendTo(".remainingEnemies");
             $(".playerBox").hide();
           }
@@ -117,9 +120,6 @@
           opponent = playersArray[opponentId];
         }
       }
-
-      //move enemies to remaining enemies div ~I THINK THIS IS THE ISSUE~ MOVE THEM ONE BY ONE USNG A LOOP?
-      // $(".playerBox").appendTo(".remainingEnemies");
     })
   }
 
@@ -132,14 +132,14 @@
       //decrease health variables accordingly
       player.healthPoints -= opponent.counterAttackPower;
       opponent.healthPoints -= player.attackPower;
-      //update HP and double player attack power
+      //update HP text and increase player attack power
       $(".playerCharacter").find("span").html("HP: " + player.healthPoints);
       $(".currentOpponent").find("span").html("HP: " + opponent.healthPoints);
       player.attackPower += player.attackPower;
 
       //if player dies
       if (player.healthPoints <= 0) {
-        //show restart button and loser text (make a better losing/win screen later)
+        //show restart button and loser text. Pause Audio
         restart.show();
         status.show();
         $("#winOrLose").html("YOU LOSE");
@@ -149,8 +149,9 @@
         $(".currentOpponent").empty();
         //set opponent to null so player click picks up new object
         opponent = null;
+        //if both players dies at the same time - player still loses
       } else if (opponent.healthPoints <= 0 && player.healthPoints <= 0) {
-        //show restart button and loser text (make a better losing/win screen later)
+        //show restart button and loser text. Pause Audio
         restart.show();
         status.show();
         $("#winOrLose").html("YOU LOSE");
@@ -158,7 +159,7 @@
       }
       // if player wins 
       if (isEmpty($(".remainingEnemies")) && player.healthPoints > 0) {
-        //show restart button and loser text (make a better losing/win screen later)
+        //show restart button and loser text. Pause Audio
         restart.show();
         status.show();
         $("#winOrLose").html("YOU WIN")
