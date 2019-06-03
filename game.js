@@ -2,8 +2,8 @@
   let player;
   //holds the current opponent object
   let opponent;
-  //holds all remaining opponents
-  let opponents = [];
+  //restart button
+  let restart = $("#restart")
 
   //checks if an element is empty. works more consistently than the empty selector
   function isEmpty(element) {
@@ -61,8 +61,7 @@
     //empty vars/array/divs
     player = null;
     opponent = null;
-    opponents = [];
-    $(".playerCharacter", ".remainingEnemies", ".currentOpponent").empty();
+    $(".playerCharacter", ".remainingEnemies", ".currentOpponent", "#HP").empty();
 
     //loops through and populates each div for the starting character selection with image, name, and HP
     $.each(playersArray, function (index, player) {
@@ -76,23 +75,19 @@
 
       //if player doesn't exist or is null
       if (isEmpty($(".playerCharacter"))) {
-        $("#restart").hide();
+        restart.hide();
         playTheme();
         //grab the ID of the parent div and use as index to grab correct object from array and store in variable player
         let playerIndex = parseInt($(this).closest("div").prop("id"));
         player = playersArray[playerIndex];
         //move selected character to player div
         $(this).appendTo(".playerCharacter");
-        // add opponents to their own separate array
-        $.each(playersArray, function (index, opponent) {
-          let opponentIndex = playersArray.indexOf(opponent);
-          if (opponentIndex !== playerIndex) {
-            opponents.push(opponent);
-          }
-        })
+
       } else if ($(this).parents(".remainingEnemies").length) {
         if (isEmpty($(".currentOpponent"))) {
           $(this).appendTo(".currentOpponent");
+          let opponentId = parseInt($(this).closest("div").prop("id"));
+          opponent = playersArray[opponentId];
         }
       }
 
@@ -102,21 +97,41 @@
   }
 
 
-  initializeGame();
-  $("#attack").on("click", function () {
-    if (opponent && player) {
 
+
+  $("#attack").on("click", function () {
+    if (opponent) {
+      //decrease health variables accordingly
+      player.healthPoints -= opponent.counterAttackPower;
+      opponent.healthPoints -= player.attackPower;
+
+      //update HP and double player attack power
+      $(".playerCharacter").find("span").html("HP: " + player.healthPoints);
+      $(".currentOpponent").find("span").html("HP: " + opponent.healthPoints);
+      player.attackPower = player.attackPower * 2;
+
+
+      if (player.healthPoints <= 0) {
+        restart.show();
+        $("#winOrLose").html("YOU LOSE");
+      } else if (opponent.healthPoints <= 0) {
+        $(".currentOpponent").empty();
+        opponent = null;
+      }
+
+      if (isEmpty($(".playerBox"))) {
+        $("#winOrLose").html("YOU WIN")
+        restart.show();
+      }
     }
   })
 
 
-
-
-
-
-
   //RUNNING THE GAME (functions are great)
+  initializeGame();
+  restart.on("click", function () {
 
-  $("#restart").on("click", function () {
     initializeGame();
+
+
   })
