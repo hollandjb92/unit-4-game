@@ -28,36 +28,36 @@
       bojack = {
         player: "Bojack",
         playerImg: "images/bojack.png",
-        healthPoints: 300,
-        attackPower: 3,
+        healthPoints: 200,
+        attackPower: 5,
         counterAttackPower: 10
       },
       diane = {
         player: "Diane",
         playerImg: "images/diane.png",
         healthPoints: 100,
-        attackPower: 23,
+        attackPower: 25,
         counterAttackPower: 25
       },
       carolyn = {
         player: "Princess Carolyn",
         playerImg: "images/princesscarolyn.png",
-        healthPoints: 200,
-        attackPower: 6,
+        healthPoints: 150,
+        attackPower: 8,
         counterAttackPower: 16
       },
       todd = {
         player: "Todd",
         playerImg: "images/todd.png",
-        healthPoints: 150,
-        attackPower: 12,
+        healthPoints: 125,
+        attackPower: 14,
         counterAttackPower: 21
       },
       peanutbutter = {
         player: "Mr. Peanutbutter",
         playerImg: "images/peanutbutter.png",
-        healthPoints: 250,
-        attackPower: 9,
+        healthPoints: 175,
+        attackPower: 11,
         counterAttackPower: 22
       }
     ]
