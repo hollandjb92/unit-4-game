@@ -9,6 +9,8 @@ html {
   background-size: cover;
   font-family: "Ness";
   overflow: hidden;
+  color: white;
+  text-shadow: 1px 1px 2px black, 0 0 5px black, 0 0 5px black;
 }
 
 
@@ -25,8 +27,6 @@ html {
 .currentOpponent div,
 .remainingEnemies div {
   text-align: center;
-  color: white;
-  text-shadow: 1px 1px 2px black, 0 0 5px black, 0 0 5px black;
   font-size: 1.4rem;
   width: 13%;
   height: 200px;
@@ -57,8 +57,6 @@ html {
   font-size: 4.375rem;
   font-weight: 900;
   margin-top: 0.9375rem;
-  color: white;
-  text-shadow: 1px 1px 2px black, 0 0 5px black, 0 0 5px black;
 }
 
 .gameLogo img {
@@ -76,8 +74,7 @@ html {
 .gameText {
   font-size: 2rem;
   font-weight: 600;
-  color: white;
-  text-shadow: 1px 1px 2px black, 0 0 5px black, 0 0 5px black;
+
 }
 
 #restart {
@@ -92,8 +89,6 @@ html {
 
 #winOrLose {
   font-size: 250px;
-  color: white;
-  text-shadow: 1px 1px 2px black, 0 0 5px black, 0 0 5px black;
   font-weight: 900;
   position: absolute;
   top: 30%;
